@@ -2,7 +2,7 @@
 
 /*namespace MagicStore {
     public class Program {
-        string connectionString = "Server=tcp:211115-sql-meganp.database.windows.net,1433;Initial Catalog=Project0DB;Persist Security Info=False;User ID=DBADMIN;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        string connectionString = ;
         using SqlConnection connection = new (connectionString);
         connection.Open();
 
