@@ -1,15 +1,19 @@
 using System;
 
 namespace MagicStore {
-	public class Store {
+	public class Store : ILoadOrderHistory {
 		private string location;
 		private List<Product>? inventory;
-		private List<Order>? orderHistory;
+		private int ID;
 
-		public Store (string location, List<Product> inventory) {
+		public Store (int ID, string location, List<Product> inventory) {
 			this.location = location;
 			this.inventory = inventory;
-			this.orderHistory = new List<Order>();
+			this.ID = ID;
+		}
+
+		public int Id {
+			get { return this.ID; } 
 		}
 
 		public string Name {
@@ -24,13 +28,12 @@ namespace MagicStore {
 			for (int i = 0; i < order.Items.Count; i++) {
 				for (int j = 0; j < inventory.Count; j++) {
 					if (order.Items[i].Name == inventory[j].Name) {
-						inventory[i].Quantity -= order.Items[i].Quantity;
+						inventory[i].Quantity-= order.Items[i].Quantity;
 						break;
 					}
 				}
 			}
 			Console.WriteLine("Purchase Successful with the Store");
-			this.orderHistory.Add(order);
 			return true;
 		}
 
@@ -53,5 +56,9 @@ namespace MagicStore {
 			}
 			return total;
 		}
+
+		public void LoadOrderHistory() {
+
+        }
 	}
 }

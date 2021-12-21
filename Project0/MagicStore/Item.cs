@@ -2,6 +2,7 @@ using System;
 
 namespace MagicStore {
 	public class Item {
+		private int productID;
 		private string name;
 		private int quantity;
 		private double salePrice;  //Customer Price
@@ -12,6 +13,11 @@ namespace MagicStore {
 			this.quantity = quantity;
 			this.salePrice = product.SalePrice;
 			this.purchasePrice = product.PurchasePrice;
+			this.productID = product.Id;
+		}
+
+		public int ProductID {
+			get { return productID; }
 		}
 
 		public string Name {

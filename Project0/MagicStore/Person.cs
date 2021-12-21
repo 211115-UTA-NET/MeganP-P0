@@ -7,12 +7,14 @@ namespace MagicStore {
 		private string? password;
 		private readonly string? username;
 		protected BankAccount? bankAccount;
+		protected int ID;
 
 		public Person() {
 			bankAccount = new BankAccount(this, 0);
 		}
 
-		public Person (string firstName, string lastName,  string password, double initialFunds) {
+		public Person (int ID, string firstName, string lastName,  string password, double initialFunds) {
+			this.ID = ID;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.username = firstName + lastName;

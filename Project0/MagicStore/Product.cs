@@ -2,16 +2,22 @@ using System;
 
 namespace MagicStore {
 	public class Product {
+		private int ID;
 		private string name;
 		private int quantity;
 		private double salePrice; //Customer price
 		private double purchasePrice; //Owner Price
 
-		public Product(string name, int quantity, double salePrice, double purchasePrice) {
+		public Product(int ID, string name, int quantity, double salePrice, double purchasePrice) {
+			this.ID = ID;
 			this.name = name;
 			this.quantity = quantity;
 			this.salePrice = salePrice;
 			this.purchasePrice = purchasePrice;
+		}
+
+		public int Id {
+			get { return ID; }
 		}
 
 		public string Name {

@@ -4,14 +4,12 @@ namespace MagicStore {
 	public class Order {
 		private Store store;
 		private Person customer;
-		private DateTime timeStamp;
 		private List<Item>? items;
 		private double total;
 
 		public Order(Store store, Customer customer, List<Item> items) {
 			this.store = store;
 			this.customer = customer;
-			this.timeStamp = DateTime.Now;
 			this.items = items;
 			this.total = this.CTotal();
 		}
@@ -25,11 +23,11 @@ namespace MagicStore {
 
 		public List<Item> Items {
 			get {return this.items;}
-		}	 
+		}	
 
 		public double Total {
 			get { return this.total; }
-		}
+		}	
 
 		public double CTotal() {
 			double total = 0;

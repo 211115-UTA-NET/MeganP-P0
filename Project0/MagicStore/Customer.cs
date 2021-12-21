@@ -1,14 +1,14 @@
 using System;
+using System.Data.SqlClient;
 
 namespace MagicStore {
-	public class Customer : Person {
+	public class Customer : Person, ISaveOrder, ILoadOrderHistory {
 		private List<Item>? shoppingCart;
 		private Store? store;
-		private List<Order>? orderHistory;
+		
 
-		public Customer(Store store, string firstName, string lastName, string password, double initialFunds) : base (firstName, lastName, password, initialFunds) {
+		public Customer(int ID, Store store, string firstName, string lastName, string password, double initialFunds) : base (ID, firstName, lastName, password, initialFunds) {
 			this.store = store;
-			orderHistory = new List<Order>();
 			shoppingCart = new List<Item>();
 		}
 
@@ -42,11 +42,43 @@ namespace MagicStore {
 			if (success == true) {
 				this.store.MakePurchase(order);
 				this.shoppingCart.Clear();
-				this.orderHistory.Add(order);
+				this.SaveOrder(order);
 				return true;
 			} else {
 				return false;
 			}
 		}
+
+		public void SaveOrder(Order order) {
+			string connectionString = File.ReadAllText("StringConnection.txt");
+			using SqlConnection connection = new(connectionString);
+			
+			connection.Open();
+			string insertOrder = $"INSERT INTO Orders(StoreID, PersonID, Total) VALUES ({this.store.Id}, {this.ID}, {order.Total});";
+			using SqlCommand command = new(insertOrder, connection);
+			using SqlDataReader reader = command.ExecuteReader();
+			connection.Close();
+
+			connection.Open();
+			string getOrderID = "SELECT MAX(OrderID) FROM Orders;";
+			using SqlCommand getOrderCommand = new SqlCommand(getOrderID, connection);
+			using SqlDataReader getOrderReader = getOrderCommand.ExecuteReader();
+			getOrderReader.Read();
+			int OrderID = getOrderReader.GetInt32(0);
+			connection.Close();
+
+			for (int i = 0; i < shoppingCart.Count; i++) {
+
+				connection.Open();
+				string insertItems = $"INSERT INTO PurchasedItems(OrderID, ProductID, Quantity, Price) VALUES ({OrderID}, {shoppingCart[i].ProductID}, {shoppingCart[i].Quantity}, {shoppingCart[i].SalePrice});";
+				using SqlCommand sqlCommand = new SqlCommand(insertItems, connection);	
+				using SqlDataReader sqlReader = sqlCommand.ExecuteReader();
+				connection.Close();
+			}
+        }
+
+		public void LoadOrderHistory() {											  
+
+        }
 	}
 }

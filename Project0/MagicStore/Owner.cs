@@ -1,10 +1,10 @@
 using System; 
 
 namespace MagicStore {
-	public class Owner : Person {
+	public class Owner : Person, ISaveOrder {
 		private List<Store>? stores;
 		
-		public Owner (string firstName, string lastName, string password, double initialFunds) : base (firstName, lastName, password, initialFunds) {
+		public Owner (int ID, string firstName, string lastName, string password, double initialFunds) : base (ID, firstName, lastName, password, initialFunds) {
 			
 		}
 
@@ -20,6 +20,10 @@ namespace MagicStore {
 			}
 			return false;
         }
+
+		public void SaveOrder(Order order) {
+
+		}
 
 	}
 }

@@ -10,11 +10,11 @@ namespace MagicStore.Tests {
         [Fact]
         public void BankAccount_MakeTransaction_PositiveNumber_True() {
             //Arrange
-            Product product = new Product("Poison Apple", 100, 1100, 100);
+            Product product = new Product(1, "Poison Apple", 100, 1100, 100);
             List<Product> listProducts = new List<Product>();
             listProducts.Add(product);
-            Store store = new Store("Astoria", listProducts);
-            Customer customer = new Customer(store, "Megan", "Postlewait", "meganpostlewait", "testPassword", 100000);
+            Store store = new Store(2, "Astoria", listProducts);
+            Customer customer = new Customer(1, store, "Megan", "Postlewait", "testPassword", 100000);
             Item item = new Item(product, 1);
             List<Item> listItems = new List<Item>();
             listItems.Add(item);
@@ -32,11 +32,11 @@ namespace MagicStore.Tests {
         [Fact]
         public void BankAccount_MakeTransaction_Zero_True() {
             //Arrange
-            Product product = new Product("Poison Apple", 100, 1100, 100);
+            Product product = new Product(1, "Poison Apple", 100, 1100, 100);
             List<Product> listProducts = new List<Product>();
             listProducts.Add(product);
-            Store store = new Store("Astoria", listProducts);
-            Customer customer = new Customer(store, "Megan", "Postlewait", "meganpostlewait", "testPassword", 100000);
+            Store store = new Store(2, "Astoria", listProducts);
+            Customer customer = new Customer(1, store, "Megan", "Postlewait", "testPassword", 100000);
             Item item = new Item(product, 1);
             List<Item> listItems = new List<Item>();
             listItems.Add(item);
@@ -54,11 +54,11 @@ namespace MagicStore.Tests {
         [Fact]
         public void BankAccount_MakeTransaction_NegativeNumber_False() {
             //Arrange
-            Product product = new Product("Poison Apple", 100, 1100, 100);
+            Product product = new Product(1, "Poison Apple", 100, 1100, 100);
             List<Product> listProducts = new List<Product>();
             listProducts.Add(product);
-            Store store = new Store("Astoria", listProducts);
-            Customer customer = new Customer(store, "Megan", "Postlewait", "meganpostlewait", "testPassword", 100000);
+            Store store = new Store(2, "Astoria", listProducts);
+            Customer customer = new Customer(1, store, "Megan", "Postlewait", "testPassword", 100000);
             Item item = new Item(product, 1);
             List<Item> listItems = new List<Item>();
             listItems.Add(item);
@@ -77,11 +77,11 @@ namespace MagicStore.Tests {
         [Fact]
         public void Customer_MakePurchase_PositiveFunds_True() {
             //Arrange
-            Product product = new Product("Poison Apple", 100, 1100, 100);
+            Product product = new Product(1, "Poison Apple", 100, 1100, 100);
             List<Product> listProducts = new List<Product>();
             listProducts.Add(product);
-            Store store = new Store("Astoria", listProducts);
-            Customer customer = new Customer(store, "Megan", "Postlewait", "meganpostlewait", "testPassword", 100000);
+            Store store = new Store(2, "Astoria", listProducts);
+            Customer customer = new Customer(1, store, "Megan", "Postlewait", "testPassword", 100000);
             Item item = new Item(product, 1);
 
             customer.AddToCart(product, 3);
@@ -96,11 +96,11 @@ namespace MagicStore.Tests {
         [Fact]
         public void Customer_MakePurchase_NegativeFunds_False() {
             //Arrange
-            Product product = new Product("Poison Apple", 100, 1100, 100);
+            Product product = new Product(1, "Poison Apple", 100, 1100, 100);
             List<Product> listProducts = new List<Product>();
             listProducts.Add(product);
-            Store store = new Store("Astoria", listProducts);
-            Customer customer = new Customer(store, "Megan", "Postlewait", "meganpostlewait", "testPassword", 1100);
+            Store store = new Store(2, "Astoria", listProducts);
+            Customer customer = new Customer(1, store, "Megan", "Postlewait", "testPassword", 1100);
             Item item = new Item(product, 1);
 
             customer.AddToCart(product, 3);

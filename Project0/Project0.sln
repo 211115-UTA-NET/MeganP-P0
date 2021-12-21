@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStore", "MagicStore\MagicStore.csproj", "{C2300E56-EEFD-454F-9D77-33C46F564075}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStore.Tests", "MagicStore.Tests\MagicStore.Tests.csproj", "{0CB247CD-627D-4A9B-BC65-DC89CD5B0759}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2300E56-EEFD-454F-9D77-33C46F564075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2300E56-EEFD-454F-9D77-33C46F564075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2300E56-EEFD-454F-9D77-33C46F564075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2300E56-EEFD-454F-9D77-33C46F564075}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CB247CD-627D-4A9B-BC65-DC89CD5B0759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CB247CD-627D-4A9B-BC65-DC89CD5B0759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CB247CD-627D-4A9B-BC65-DC89CD5B0759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CB247CD-627D-4A9B-BC65-DC89CD5B0759}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

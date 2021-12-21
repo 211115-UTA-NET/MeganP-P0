@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c2300e56-eefd-454f-9d77-33c46f564075": {
+      "ProjectGuid": "c2300e56-eefd-454f-9d77-33c46f564075",
+      "DisplayName": "MagicStore",
+      "ColorIndex": 0
+    },
+    "0cb247cd-627d-4a9b-bc65-dc89cd5b0759": {
+      "ProjectGuid": "0cb247cd-627d-4a9b-bc65-dc89cd5b0759",
+      "DisplayName": "MagicStore.Tests",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
