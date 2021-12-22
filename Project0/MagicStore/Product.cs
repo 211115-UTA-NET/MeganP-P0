@@ -5,10 +5,13 @@ namespace MagicStore {
 		private int ID;
 		private string name;
 		private int quantity;
-		private double salePrice; //Customer price
-		private double purchasePrice; //Owner Price
+		private decimal salePrice; //Customer price
+		private decimal purchasePrice; //Owner Price
 
-		public Product(int ID, string name, int quantity, double salePrice, double purchasePrice) {
+		/*<summary> constructor
+		<return> new Product
+	    */
+		public Product(int ID, string name, int quantity, decimal salePrice, decimal purchasePrice) {
 			this.ID = ID;
 			this.name = name;
 			this.quantity = quantity;
@@ -16,31 +19,52 @@ namespace MagicStore {
 			this.purchasePrice = purchasePrice;
 		}
 
+		/*<summary> property returning ID
+		<return> int
+	    */
 		public int Id {
 			get { return ID; }
 		}
 
+		/*<summary> property returning Name
+		<return> string
+	    */
 		public string Name {
 			get {return this.name;}
 		}
 
+		/*<summary> property returning Quanity
+		<return> Qunatity
+	    */
 		public int Quantity {
 			get {return this.quantity;}
 			set {this.quantity = value;}
 		}
 
-		public double SalePrice {
+		/*<summary> property returning SalePrice
+		<return> decimal
+	    */
+		public decimal SalePrice {
 			get {return this.salePrice;}
 		}
 
-		public double PurchasePrice {
+		/*<summary> property returning PurchasePrice
+		<return> decimal
+	    */
+		public decimal PurchasePrice {
 			get {return this.purchasePrice;}
 		}
 
+		/*<summary> adds product quantity
+		<return> void
+	    */
 		public void RefillProduct (int numUnits) {
 			this.quantity += numUnits;
 		}
-		
+
+		/*<summary> reduces product quantity
+		<return> void
+	    */
 		public void BuyProduct(int numUnits) {
 			this.quantity -= numUnits;
 		}

@@ -4,42 +4,139 @@ namespace MagicStore {
     public class Program {
 
         public static void Main() {
-            Product poisonedApple = new Product(1, "Poisoned Apple", 100, 1100, 110);
-            Product darkCurse = new Product(1, "Dark Curse", 5, 5000, 500);
-            Product magicBean = new Product(1, "Magic Bean", 2, 10000, 1000);
-            Product forgettingPotion = new Product(1, "Forgetting Potion", 5000, 100, 10);
-            Product locatorPotion = new Product(1, "Locator Potion", 5000, 100, 10);
-            Product sleepingCurse = new Product(1, "Sleeping Curse", 400, 2000, 200);
-            Product mermaidLegsBracelet = new Product(1, "Mermaid Legs Bracelet", 6, 7500, 750);
-            Product flyingCarpet = new Product(1, "Flying Carpet", 1, 1100, 110);
-            Product lostSoulsWater = new Product(1, "Water from the River of Lost Souls", 10, 3000, 300);
-            Product squidInk = new Product(1, "Squid Ink", 30, 300, 30);
+            Console.WriteLine("Welcome to the Magic Store!");
+            Console.WriteLine("Please Enter Your First Name");
+            string firstName;
+            string lastName;
+            string password;
+            decimal initialFunds;
+            Customer person;
+            try {
+                firstName = Console.ReadLine().ToLower();
+            } catch (NullReferenceException nre) {
+                Console.WriteLine("You didn't enter proper input.");
+                return;
+            }
+            Console.WriteLine("Please Enter Your Last Name");
+            try {
+                lastName = Console.ReadLine().ToLower();
+            } catch (NullReferenceException nre) {
+                Console.WriteLine("You didn't enter proper input.");
+                return;
+            }
 
-            List<Product> products = new List<Product>();
-            products.Add(poisonedApple);
-            products.Add(darkCurse);
-            products.Add(magicBean);
-            products.Add(forgettingPotion);
-            products.Add(locatorPotion);
-            products.Add(sleepingCurse);
-            products.Add(mermaidLegsBracelet);
-            products.Add(flyingCarpet);
-            products.Add(lostSoulsWater);
-            products.Add(squidInk);
+            if (firstName == "megan" && lastName == "postlewait") {
+                Owner owner = SqlLoader.LoadOwner(firstName, lastName);
+                Console.WriteLine("Enter Your Password:");
+                string passWord = Console.ReadLine();
+                if (passWord != owner.Password) {
+                    Console.WriteLine("Incorrect Password");
+                    return;
+                }
+                owner.SetStores(SqlLoader.LoadOwnerStores(firstName.ToLower() + lastName.ToLower()));
+                for (int i = 0; i < owner.Stores.Count; i++) {
+                    owner.Stores[i].LoadOrderHistory();
+                }
+                return;
+            }
 
-            Store store = new Store(1, "Rochester", products);
-            Customer customer = new Customer(2, store, "Myra", "Gold", "testtesttest", 12000);
-            customer.AddToCart(poisonedApple, 2);
-            customer.AddToCart(squidInk, 3);
+            person = SqlLoader.LoadCustomer(firstName, lastName);
+            
+            if (person != null) {
+                bool isValid = false;
+                while (!isValid) {
+                    Console.WriteLine("Please Enter Password");
 
-            Item item1 = new Item(poisonedApple, 2);
-            Item item2 = new Item(squidInk, 3);
-            List<Item> shoppingCart = new List<Item>();
-            shoppingCart.Add(item1);
-            shoppingCart.Add(item2);
+                    try {
+                        password = Console.ReadLine();
+                    } catch (NullReferenceException nre) {
+                        Console.WriteLine("You didn't enter proper input.");
+                        return;
+                    }
 
-            Order order = new Order(store, customer, shoppingCart);
-            customer.SaveOrder(order);
+                    isValid = person.ValidatePassword(password);
+                    if (!isValid) {
+                        Console.WriteLine("Incorrect Password; Try Again.");
+                    }
+                }
+                Console.WriteLine();
+            } else {
+                Console.WriteLine("Welcome New Shopper");
+                Console.WriteLine("Let's Set up Your Account");
+                Console.WriteLine("Please Enter The Password You'd Like for your account");
+                
+                try {
+                    password = Console.ReadLine();
+                } catch (NullReferenceException nre) {
+                    Console.WriteLine("You didn't enter proper input.");
+                    return;
+                }
+                
+                Console.WriteLine("How much money do you have?");
+
+                try {
+                    bool num = Decimal.TryParse(Console.ReadLine(), out initialFunds);
+                } catch (NullReferenceException nre) {
+                    Console.WriteLine("You didn't enter proper input.");
+                    return;
+                }
+
+                int storeID = SqlLoader.GetStoreID();
+
+                SqlLoader.SaveNewPerson(firstName, lastName, password, initialFunds, storeID);
+                person = SqlLoader.LoadCustomer(firstName, lastName);
+                Console.WriteLine();
+            }
+
+            bool areShopping = true;
+
+            while (areShopping) {
+                
+                Console.WriteLine("Here are the items availible at your store location...");
+                Console.WriteLine("Enter the number of the item you want then enter the quantity.");
+                person.Store.PrintInventory();
+                Console.WriteLine("Enter 'check out' to Check Out");
+                Console.WriteLine("Enter 'order history' to see your comprhensive order history");
+                Console.WriteLine("Enter the Item Number you wish to add to you cart.");
+                try {
+                    string option = Console.ReadLine().ToLower();
+                    if (option == "check out") {
+                        bool success = person.MakePurchase();
+                        if (success) {
+                            Console.WriteLine("Purchase Successful, Come Again Soon. GoodBye.");
+                            break;
+                        } else {
+                            Console.WriteLine("Purchase Unsuccessful, Come Again Soon. Goodbye.");
+                            break;
+                        }
+
+                    } else if (option == "order history") {
+                        Console.WriteLine();
+                        person.LoadOrderHistory();
+                        Console.WriteLine();
+                    } else {
+                        Console.WriteLine("Enter the number that you want of that product.");
+                        int option2 = Convert.ToInt32(Console.ReadLine());
+                        int items = person.AddToCart(person.Store.Inventory[Convert.ToInt32(option)], option2);
+                        Console.WriteLine();
+                        if (items > 0) {
+                            person.PrintCart();
+                        }
+                        Console.WriteLine();
+                    }
+                } catch (NullReferenceException nre) {
+                    Console.WriteLine("You entered faulty input.");
+                    return;
+                }
+
+
+            }
+
+            
+
+            
+
+
 
 
         }

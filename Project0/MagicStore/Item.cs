@@ -5,8 +5,8 @@ namespace MagicStore {
 		private int productID;
 		private string name;
 		private int quantity;
-		private double salePrice;  //Customer Price
-		private double purchasePrice; //Owner Price
+		private decimal salePrice;  //Customer Price
+		private decimal purchasePrice; //Owner Price
 
 		public Item(Product product, int quantity) {
 			this.name = product.Name;
@@ -16,24 +16,38 @@ namespace MagicStore {
 			this.productID = product.Id;
 		}
 
+		/*<summary> property returning ProductID
+		<return> int
+	    */
 		public int ProductID {
 			get { return productID; }
 		}
 
+		/*<summary> property returning Name
+		<return> string
+	    */
 		public string Name {
 			get {return this.name;}
 		}
 
+		/*<summary> property returning quantity
+		<return> int
+	    */
 		public int Quantity {
 			get {return this.quantity;}
-			set {this.quantity = value;}
 		}
 
-		public double SalePrice {
+		/*<summary> property returning SalePrice
+		<return> decimal
+	    */
+		public decimal SalePrice {
 			get {return this.salePrice;}
 		}
 
-		public double PurchasePrice {
+		/*<summary> property returning PurchasePrice
+		<return> decimal
+	    */
+		public decimal PurchasePrice {
 			get { return this.purchasePrice; }
 		}
 
